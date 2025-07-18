@@ -5,7 +5,8 @@ import dev.otavio.cleanarchstudy.core.enums.EventTypes;
 import java.time.LocalDateTime;
 
 public record Event(
-        Long id, String Name,
+        Long id,
+        String Name,
         String Description,
         String Location,
         LocalDateTime StartDate,
