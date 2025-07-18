@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5431:5432"
+    container_name: CleanArchStudy
+    environment:
+        POSTGRES_DB: cleanBD
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
