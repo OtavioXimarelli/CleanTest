@@ -2,9 +2,11 @@ package dev.otavio.cleanarchstudy.infrastructure.mapper;
 
 import dev.otavio.cleanarchstudy.core.entities.Event;
 import dev.otavio.cleanarchstudy.infrastructure.dtos.EventDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EventMapper {
-    public EventDTO toEventDto(Event event) {
+    public EventDTO mapToDto(Event event) {
         return new EventDTO(
                 event.id(),
                 event.Name(),
@@ -22,7 +24,7 @@ public class EventMapper {
 
     }
 
-    public Event toEventEntity(EventDTO eventDTO) {
+    public Event mapToEntity(EventDTO eventDTO) {
         return new Event(
                 eventDTO.id(),
                 eventDTO.Name(),
