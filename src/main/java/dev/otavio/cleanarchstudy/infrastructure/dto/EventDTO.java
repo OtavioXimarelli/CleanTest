@@ -1,4 +1,4 @@
-package dev.otavio.cleanarchstudy.infrastructure.dtos;
+package dev.otavio.cleanarchstudy.infrastructure.dto;
 
 import dev.otavio.cleanarchstudy.core.enums.EventTypes;
 
