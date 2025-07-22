@@ -3,7 +3,7 @@ package dev.otavio.cleanarchstudy.infrastructure.presentation;
 
 import dev.otavio.cleanarchstudy.core.entities.Event;
 import dev.otavio.cleanarchstudy.core.usecases.CreateEventCase;
-import dev.otavio.cleanarchstudy.infrastructure.dtos.EventDTO;
+import dev.otavio.cleanarchstudy.infrastructure.dto.EventDTO;
 import dev.otavio.cleanarchstudy.infrastructure.mapper.EventMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
