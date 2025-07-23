@@ -5,7 +5,7 @@ import dev.otavio.cleanarchstudy.infrastructure.persistence.EventEntity;
 
 public class EventEntityMapper {
 
-    public EventEntity toEntity (Event event) {
+    public EventEntity toEventEntity (Event event) {
         return new EventEntity(
                 event.id(),
                 event.Name(),
@@ -22,7 +22,7 @@ public class EventEntityMapper {
         );
     }
 
-    public Event toEvent (EventEntity eventEntity) {
+    public Event toEventDomain(EventEntity eventEntity) {
         return new Event(
                 eventEntity.getId(),
                 eventEntity.getName(),
