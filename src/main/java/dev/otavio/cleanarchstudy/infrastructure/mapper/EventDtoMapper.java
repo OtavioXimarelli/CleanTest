@@ -5,7 +5,7 @@ import dev.otavio.cleanarchstudy.infrastructure.dto.EventDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EventMapper {
+public class EventDtoMapper {
     public EventDTO mapToDto(Event event) {
         return new EventDTO(
                 event.id(),
