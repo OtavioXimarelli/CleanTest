@@ -5,6 +5,7 @@ import dev.otavio.cleanarchstudy.core.entities.Event;
 import dev.otavio.cleanarchstudy.core.usecases.CreateEventCase;
 import dev.otavio.cleanarchstudy.infrastructure.dto.EventDTO;
 import dev.otavio.cleanarchstudy.infrastructure.mapper.EventDtoMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,7 @@ public class EventController {
     public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO) {
         Event newEvent = createEventCase.execute(eventDtoMapper.mapToEntity(eventDTO));
         var eventDtoFinal = eventDtoMapper.mapToDto(newEvent);
-        return ResponseEntity.ok(eventDtoFinal);
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventDtoFinal);
 
     }
 }
