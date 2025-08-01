@@ -14,6 +14,7 @@ public record Event(
         String Owner,
         String Contact,
         String Type,
+
         EventTypes Category,
         Integer Capacity,
         String Identification
