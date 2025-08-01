@@ -1,20 +1,20 @@
 package dev.otavio.cleanarchstudy.infrastructure.persistence;
 
 import dev.otavio.cleanarchstudy.core.enums.EventTypes;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
-
+@Entity
+@Table(name = "Events")
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class EventEntity {
 
     @Id
@@ -37,7 +37,8 @@ public class EventEntity {
 
     private String type;
 
-    @Enumerated(EnumType.STRING)
+
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private EventTypes category;
 
     private Integer capacity;
