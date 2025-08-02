@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/events")
@@ -35,8 +36,12 @@ public class EventController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Event>> listEvent (Event events){
-        List<Event> list = findEventUseCase.execute(events);
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+    public List<EventDTO> listEvent (){
+        return findEventUseCase.execute()
+                .stream()
+                .map(eventDtoMapper::mapToDto)
+                .collect(Collectors.toList());
+
+
     }
 }
