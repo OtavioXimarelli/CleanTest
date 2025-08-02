@@ -8,5 +8,5 @@ public interface EventGateway {
 
     public Event createEvent (Event event);
 
-    public List<Event> listEvent (Event event);
+    public List<Event> listEvent ();
 }
