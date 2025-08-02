@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface FindEventUseCase {
 
-    public List<Event> execute(Event event);
+     List<Event> execute();
 }
