@@ -30,8 +30,10 @@ public class EventRepositoryGateway implements EventGateway {
 
 
     @Override
-    public List<Event> listEvent(Event event) {
-        List<EventEntity> entities = eventRepository.findAll();
-        return entities.stream().map(eventEntityMapper::toEventDomain).toList();
+    public List<Event> listEvent() {
+        return eventRepository.findAll()
+                .stream()
+                .map(eventEntityMapper::toEventDomain)
+                .toList();
     }
 }
