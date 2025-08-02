@@ -5,11 +5,11 @@ import dev.otavio.cleanarchstudy.core.gateway.EventGateway;
 
 import java.util.List;
 
-public class FindEventImpl implements FindEventCase {
+public class FindEventUseCaseImpl implements FindEventUseCase {
 
     private final EventGateway eventGateway;
 
-    public FindEventImpl(EventGateway eventGateway) {
+    public FindEventUseCaseImpl(EventGateway eventGateway) {
         this.eventGateway = eventGateway;
     }
 

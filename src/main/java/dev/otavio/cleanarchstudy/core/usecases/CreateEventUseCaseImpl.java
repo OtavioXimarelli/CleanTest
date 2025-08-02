@@ -3,11 +3,11 @@ package dev.otavio.cleanarchstudy.core.usecases;
 import dev.otavio.cleanarchstudy.core.entities.Event;
 import dev.otavio.cleanarchstudy.core.gateway.EventGateway;
 
-public class CreateEventImpl implements CreateEventCase {
+public class CreateEventUseCaseImpl implements CreateEventUseCase {
 
     private final EventGateway eventGateway;
 
-    public CreateEventImpl(EventGateway eventGateway) {
+    public CreateEventUseCaseImpl(EventGateway eventGateway) {
         this.eventGateway = eventGateway;
     }
 

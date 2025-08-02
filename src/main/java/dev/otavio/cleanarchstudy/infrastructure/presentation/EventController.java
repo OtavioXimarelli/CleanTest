@@ -2,8 +2,8 @@ package dev.otavio.cleanarchstudy.infrastructure.presentation;
 
 
 import dev.otavio.cleanarchstudy.core.entities.Event;
-import dev.otavio.cleanarchstudy.core.usecases.CreateEventCase;
-import dev.otavio.cleanarchstudy.core.usecases.FindEventCase;
+import dev.otavio.cleanarchstudy.core.usecases.CreateEventUseCase;
+import dev.otavio.cleanarchstudy.core.usecases.FindEventUseCase;
 import dev.otavio.cleanarchstudy.infrastructure.dto.EventDTO;
 import dev.otavio.cleanarchstudy.infrastructure.mapper.EventDtoMapper;
 import org.springframework.http.HttpStatus;
@@ -16,19 +16,19 @@ import java.util.List;
 @RequestMapping("api/v1/events")
 public class EventController {
 
-    private final CreateEventCase createEventCase;
+    private final CreateEventUseCase createEventUseCase;
     private final EventDtoMapper eventDtoMapper;
-    private final FindEventCase findEventCase;
+    private final FindEventUseCase findEventUseCase;
 
-    public EventController(CreateEventCase createEventCase, EventDtoMapper eventDtoMapper, FindEventCase findEventCase) {
-        this.createEventCase = createEventCase;
+    public EventController(CreateEventUseCase createEventUseCase, EventDtoMapper eventDtoMapper, FindEventUseCase findEventUseCase) {
+        this.createEventUseCase = createEventUseCase;
         this.eventDtoMapper = eventDtoMapper;
-        this.findEventCase = findEventCase;
+        this.findEventUseCase = findEventUseCase;
     }
 
     @PostMapping("/create")
     public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO) {
-        Event newEvent = createEventCase.execute(eventDtoMapper.mapToEntity(eventDTO));
+        Event newEvent = createEventUseCase.execute(eventDtoMapper.mapToEntity(eventDTO));
         var eventDtoFinal = eventDtoMapper.mapToDto(newEvent);
         return ResponseEntity.status(HttpStatus.CREATED).body(eventDtoFinal);
 
@@ -36,7 +36,7 @@ public class EventController {
 
     @GetMapping("/list")
     public ResponseEntity<List<Event>> listEvent (Event events){
-        List<Event> list = findEventCase.execute(events);
+        List<Event> list = findEventUseCase.execute(events);
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }
