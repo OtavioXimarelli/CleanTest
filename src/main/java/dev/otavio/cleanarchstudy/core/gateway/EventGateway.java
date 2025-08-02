@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EventGateway {
 
-    public Event createEvent (Event event);
+    Event createEvent(Event event);
 
-    public List<Event> listEvent ();
+    List<Event> listEvent();
 }
