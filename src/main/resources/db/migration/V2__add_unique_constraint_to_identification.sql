@@ -1,0 +1,2 @@
+ALTER TABLE Events
+ADD CONSTRAINT unique_identification UNIQUE (IDENTIFICATION);
