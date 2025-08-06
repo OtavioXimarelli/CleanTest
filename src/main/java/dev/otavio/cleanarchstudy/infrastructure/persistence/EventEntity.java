@@ -43,6 +43,7 @@ public class EventEntity {
 
     private Integer capacity;
 
+
     private String identification;
 
 }
