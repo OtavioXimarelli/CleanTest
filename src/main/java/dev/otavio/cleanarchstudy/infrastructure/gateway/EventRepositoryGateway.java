@@ -46,7 +46,7 @@ public class EventRepositoryGateway implements EventGateway {
     }
 
     @Override
-    public Optional<Event> findByIdentification(String identification) {;
+    public Optional<Event> findByIdentification(String identification) {
         return eventRepository.findByIdentification(identification);
 
     }
