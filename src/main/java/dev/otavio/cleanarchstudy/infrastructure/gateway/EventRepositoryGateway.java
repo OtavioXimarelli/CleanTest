@@ -8,6 +8,7 @@ import dev.otavio.cleanarchstudy.infrastructure.persistence.EventRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class EventRepositoryGateway implements EventGateway {
@@ -44,6 +45,11 @@ public class EventRepositoryGateway implements EventGateway {
                 .anyMatch(event -> event.getIdentification().equalsIgnoreCase(indentificator));
     }
 
+    @Override
+    public Optional<Event> findByIdentification(String identification) {;
+        return eventRepository.findByIdentification(identification);
+
+    }
 
 }
 
