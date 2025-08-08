@@ -3,15 +3,20 @@ package dev.otavio.cleanarchstudy.infrastructure.presentation;
 
 import dev.otavio.cleanarchstudy.core.entities.Event;
 import dev.otavio.cleanarchstudy.core.usecases.CreateEventUseCase;
+import dev.otavio.cleanarchstudy.core.usecases.FindByIdentificationUseCase;
 import dev.otavio.cleanarchstudy.core.usecases.FindEventUseCase;
 import dev.otavio.cleanarchstudy.infrastructure.dto.EventDTO;
 import dev.otavio.cleanarchstudy.infrastructure.mapper.EventDtoMapper;
+import dev.otavio.cleanarchstudy.infrastructure.persistence.EventRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping("api/v1/events")
@@ -20,13 +25,16 @@ public class EventController {
     private final CreateEventUseCase createEventUseCase;
     private final EventDtoMapper eventDtoMapper;
     private final FindEventUseCase findEventUseCase;
+    private final EventRepository eventRepository;
+    private final FindByIdentificationUseCase findByIdentificationUseCase;
 
 
-    public EventController(CreateEventUseCase createEventUseCase, EventDtoMapper eventDtoMapper, FindEventUseCase findEventUseCase){
+    public EventController(CreateEventUseCase createEventUseCase, EventDtoMapper eventDtoMapper, FindEventUseCase findEventUseCase, EventRepository eventRepository, FindByIdentificationUseCase findByIdentificationUseCase) {
         this.createEventUseCase = createEventUseCase;
         this.eventDtoMapper = eventDtoMapper;
         this.findEventUseCase = findEventUseCase;
-
+        this.eventRepository = eventRepository;
+        this.findByIdentificationUseCase = findByIdentificationUseCase;
     }
 
     @PostMapping("/create")
@@ -36,20 +44,43 @@ public class EventController {
         Map<String, Object> eventCreateResponse = new HashMap<>();
         eventCreateResponse.put("Message: ", "The event was created successfully");
         eventCreateResponse.put("Event data", eventDtoFinal);
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventCreateResponse);
+        return status(HttpStatus.CREATED).body(eventCreateResponse);
 
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Map<String, Object>> listEvents (){
-       var eventList =  findEventUseCase.execute()
+    public ResponseEntity<Map<String, Object>> listEvents() {
+        var eventList = findEventUseCase.execute()
                 .stream()
                 .map(eventDtoMapper::mapToDto)
                 .toList();
 
-       Map<String, Object> eventListResponse = new HashMap<>();
-       eventListResponse.put("Events: ", eventList);
-       return ResponseEntity.ok(eventListResponse);
+        Map<String, Object> eventListResponse = new HashMap<>();
+        eventListResponse.put("Events: ", eventList);
+        return ok(eventListResponse);
 
     }
+
+//    @GetMapping("/event/{identification}")
+//    public ResponseEntity<Map<String, Object>> findByIdentification(@PathVariable String identification) {
+//        var foundEvent = eventRepository.findByIdentification(identification);
+//        Map<String, Object> eventListResponse = new HashMap<>();
+//        eventListResponse.put("The found event with the identification " + identification, foundEvent);
+//        return ok(eventListResponse);
+//    }
+
+
+    @GetMapping("/event/{identification}")
+    public ResponseEntity<Map<String, Object>> findByIdentification(@PathVariable String identification) {
+
+        Event event = findByIdentificationUseCase.execute(identification);
+
+        Map<String, Object> eventListResponse = new HashMap<>();
+        eventListResponse.put("The found event with the identification " +identification, event);
+        return ResponseEntity.ok(eventListResponse);
+
+
+    }
+
+
 }
