@@ -7,7 +7,6 @@ import dev.otavio.cleanarchstudy.core.usecases.FindByIdentificationUseCase;
 import dev.otavio.cleanarchstudy.core.usecases.FindEventUseCase;
 import dev.otavio.cleanarchstudy.infrastructure.dto.EventDTO;
 import dev.otavio.cleanarchstudy.infrastructure.mapper.EventDtoMapper;
-import dev.otavio.cleanarchstudy.infrastructure.persistence.EventRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +24,15 @@ public class EventController {
     private final CreateEventUseCase createEventUseCase;
     private final EventDtoMapper eventDtoMapper;
     private final FindEventUseCase findEventUseCase;
-    private final EventRepository eventRepository;
+
     private final FindByIdentificationUseCase findByIdentificationUseCase;
 
 
-    public EventController(CreateEventUseCase createEventUseCase, EventDtoMapper eventDtoMapper, FindEventUseCase findEventUseCase, EventRepository eventRepository, FindByIdentificationUseCase findByIdentificationUseCase) {
+    public EventController(CreateEventUseCase createEventUseCase, EventDtoMapper eventDtoMapper, FindEventUseCase findEventUseCase, FindByIdentificationUseCase findByIdentificationUseCase) {
         this.createEventUseCase = createEventUseCase;
         this.eventDtoMapper = eventDtoMapper;
         this.findEventUseCase = findEventUseCase;
-        this.eventRepository = eventRepository;
+
         this.findByIdentificationUseCase = findByIdentificationUseCase;
     }
 
