@@ -2,10 +2,7 @@ package dev.otavio.cleanarchstudy.infrastructure.config;
 
 
 import dev.otavio.cleanarchstudy.core.gateway.EventGateway;
-import dev.otavio.cleanarchstudy.core.usecases.CreateEventUseCase;
-import dev.otavio.cleanarchstudy.core.usecases.CreateEventUseCaseImpl;
-import dev.otavio.cleanarchstudy.core.usecases.FindEventUseCase;
-import dev.otavio.cleanarchstudy.core.usecases.FindEventUseCaseImpl;
+import dev.otavio.cleanarchstudy.core.usecases.*;
 import dev.otavio.cleanarchstudy.infrastructure.mapper.EventEntityMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,5 +25,9 @@ public class BeansConfig {
         return new FindEventUseCaseImpl(eventGateway);
     }
 
+    @Bean
+    public FindByIdentificationUseCase findByIdentificationUseCase(EventGateway eventGateway) {
+        return new FindByIdentificationUseCaseImpl(eventGateway);
+    }
 
 }
